@@ -107,13 +107,14 @@ function Profile(props) {
 		return (
 			<form action="" onChange={handleChange} onSubmit={handleSubmit}>
 				<div className="form-container">
-					<label htmlFor="profile">Profile</label>
 					<textarea
 						name="profile"
 						id="profile"
 						cols="40"
 						rows="5"
 						value={inputs.profile}
+						required
+						placeholder="Write someting about yourself."
 					></textarea>
 				</div>
 				<div className="form-container">
@@ -134,4 +135,19 @@ function Profile(props) {
 	return editMode ? EditMode() : ViewMode();
 }
 
-export { PersonalInfo, Profile };
+function PersonalDetails(props) {
+	return (
+		<div>
+			<section>
+				<h2>Personal Information</h2>
+				<PersonalInfo />
+			</section>
+			<section>
+				<h2>Profile</h2>
+				<Profile />
+			</section>
+		</div>
+	);
+}
+
+export default PersonalDetails;
