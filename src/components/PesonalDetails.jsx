@@ -1,7 +1,13 @@
 import { useState } from "react";
 
 function PersonalInfo(props) {
-	const [inputs, setInputs] = useState({});
+	const [inputs, setInputs] = useState({
+		fullName: "",
+		email: "",
+		phone: "",
+		address: "",
+	});
+
 	const [editMode, setEditMode] = useState(true);
 
 	const handleChange = (event) => {
@@ -19,9 +25,19 @@ function PersonalInfo(props) {
 		setEditMode(true);
 	};
 
+	const handleRemove = (event) => {
+		setInputs({
+			fullName: "",
+			email: "",
+			phone: "",
+			address: "",
+		});
+		setEditMode(true);
+	};
+
 	const EditMode = () => {
 		return (
-			<form action="" onChange={handleChange} onSubmit={handleSubmit}>
+			<form action="" onSubmit={handleSubmit}>
 				<div className="form-container">
 					<label htmlFor="fullName">First Name</label>
 					<input
@@ -30,6 +46,7 @@ function PersonalInfo(props) {
 						value={inputs.fullName}
 						name="fullName"
 						required
+						onChange={handleChange}
 					/>
 				</div>
 				<div className="form-container">
@@ -40,6 +57,7 @@ function PersonalInfo(props) {
 						value={inputs.email}
 						name="email"
 						required
+						onChange={handleChange}
 					/>
 				</div>
 				<div className="form-container">
@@ -50,6 +68,7 @@ function PersonalInfo(props) {
 						value={inputs.phone}
 						name="phone"
 						required
+						onChange={handleChange}
 					/>
 				</div>
 				<div className="form-container">
@@ -60,10 +79,13 @@ function PersonalInfo(props) {
 						value={inputs.address}
 						name="address"
 						required
+						onChange={handleChange}
 					/>
 				</div>
 				<div className="form-container">
-					<button type="submit">Save</button>
+					<button className="btn" type="submit">
+						Save
+					</button>
 				</div>
 			</form>
 		);
@@ -76,7 +98,12 @@ function PersonalInfo(props) {
 				<p>{inputs.email}</p>
 				<p>{inputs.phone}</p>
 				<p>{inputs.address}</p>
-				<button onClick={handleEdit}>Edit</button>
+				<div className="buttons">
+					<button onClick={handleEdit}>Edit</button>
+					<button className="btn" onClick={handleRemove}>
+						Remove
+					</button>
+				</div>
 			</div>
 		);
 	};
@@ -85,7 +112,7 @@ function PersonalInfo(props) {
 }
 
 function Profile(props) {
-	const [inputs, setInputs] = useState({});
+	const [inputs, setInputs] = useState({ profile: "" });
 	const [editMode, setEditMode] = useState(true);
 
 	const handleChange = (event) => {
@@ -103,9 +130,18 @@ function Profile(props) {
 		setEditMode(true);
 	};
 
+	const handleRemove = (event) => {
+		setInputs({
+			fullName: "",
+			email: "",
+			phone: "",
+			address: "",
+		});
+		setEditMode(true);
+	};
 	const EditMode = () => {
 		return (
-			<form action="" onChange={handleChange} onSubmit={handleSubmit}>
+			<form action="" onSubmit={handleSubmit}>
 				<div className="form-container">
 					<textarea
 						name="profile"
@@ -114,6 +150,7 @@ function Profile(props) {
 						rows="5"
 						value={inputs.profile}
 						required
+						onChange={handleChange}
 						placeholder="Write someting about yourself."
 					></textarea>
 				</div>
@@ -129,6 +166,9 @@ function Profile(props) {
 			<div>
 				<p>{inputs.profile}</p>
 				<button onClick={handleEdit}>Edit</button>
+				<button className="btn" onClick={handleRemove}>
+					Remove
+				</button>
 			</div>
 		);
 	};
@@ -137,7 +177,7 @@ function Profile(props) {
 
 function PersonalDetails(props) {
 	return (
-		<div>
+		<div className="editCV">
 			<section>
 				<h2>Personal Information</h2>
 				<PersonalInfo />
