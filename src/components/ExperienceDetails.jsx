@@ -99,10 +99,12 @@ function Experience({
 			</div>
 		</form>
 	) : (
-		<div className="experienceView">
+		<div className="experience viewMode">
 			<p>{company}</p>
-			<button onClick={handleEdit}>Edit</button>
-			<button onClick={handleRemove}>Remove</button>
+			<div className="buttons">
+				<button onClick={handleEdit}>Edit</button>
+				<button onClick={handleRemove}>Remove</button>
+			</div>
 		</div>
 	);
 }
