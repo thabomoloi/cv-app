@@ -85,10 +85,12 @@ function Education({
 			</div>
 		</form>
 	) : (
-		<div className="educationView">
+		<div className="viewMode">
 			<p>{school}</p>
-			<button onClick={handleEdit}>Edit</button>
-			<button onClick={handleRemove}>Remove</button>
+			<div className="buttons">
+				<button onClick={handleEdit}>Edit</button>
+				<button onClick={handleRemove}>Remove</button>
+			</div>
 		</div>
 	);
 }
