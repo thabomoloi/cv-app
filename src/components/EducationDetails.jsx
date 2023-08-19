@@ -6,7 +6,6 @@ function Education({
 	degree,
 	startDate,
 	endDate,
-	description,
 	handleChange,
 	editID,
 	handleEditID,
@@ -79,19 +78,6 @@ function Education({
 					onChange={handleChange}
 					data-key={id}
 				></input>
-			</div>
-			<div className="form-container">
-				<label htmlFor="description">Main Resposibilities</label>
-				<textarea
-					name="description"
-					id="description"
-					value={description}
-					cols="30"
-					rows="10"
-					required
-					onChange={handleChange}
-					data-key={id}
-				></textarea>
 			</div>
 			<div className="form-container">
 				<button type="submit">Save</button>
