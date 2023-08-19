@@ -2,6 +2,7 @@ import { useState } from "react";
 import uniqid from "uniqid";
 import PersonalDetails from "./components/PersonalDetails.jsx";
 import Education from "./components/EducationDetails.jsx";
+import Experience from "./components/ExperienceDetails.jsx";
 
 function App() {
 	const [personalDetails, setPersonalDetails] = useState({
@@ -15,6 +16,7 @@ function App() {
 	const [experience, setExperience] = useState([]);
 
 	const [educationEditID, setEducationEditID] = useState(null);
+	const [experienceEditID, setExperienceEditID] = useState(null);
 
 	const handleDetailsChange = (event) => {
 		const name = event.target.name;
@@ -62,10 +64,11 @@ function App() {
 	};
 
 	const handleExperienceAdd = (event) => {
+		const id = uniqid();
 		setExperience((prevExperience) => [
 			...prevExperience,
 			{
-				id: uniqid(),
+				id,
 				company: "",
 				position: "",
 				startDate: "",
@@ -73,6 +76,7 @@ function App() {
 				description: "",
 			},
 		]);
+		setExperienceEditID(id);
 	};
 	const handleExperienceRemove = (key) => {
 		const updatedExperience = experience.filter((item) => item.id != key);
@@ -94,6 +98,7 @@ function App() {
 		<div>
 			<div>
 				<section className="form details">
+					<h2>Personal Details</h2>
 					<PersonalDetails
 						fullName={personalDetails.fullName}
 						email={personalDetails.email}
@@ -104,7 +109,7 @@ function App() {
 					/>
 				</section>
 				<section className="form education">
-					<h1>Education</h1>
+					<h2>Education</h2>
 					{education && (
 						<div>
 							{education.map((item) => {
@@ -127,7 +132,33 @@ function App() {
 						</div>
 					)}
 					{educationEditID == null && (
-						<button onClick={handleEducationAdd}>Add</button>
+						<button onClick={handleEducationAdd}>Add Education</button>
+					)}
+				</section>
+				<section className="form experience">
+					<h2>Experience</h2>
+					{experience && (
+						<div>
+							{experience.map((item) => {
+								return (
+									<Experience
+										key={item.id}
+										id={item.id}
+										company={item.company}
+										startDate={item.startDate}
+										endDate={item.endDate}
+										description={item.description}
+										handleChange={handleExperienceChange}
+										editID={experienceEditID}
+										handleEditID={(id) => setExperienceEditID(id)}
+										removeExperience={handleExperienceRemove}
+									/>
+								);
+							})}
+						</div>
+					)}
+					{experienceEditID == null && (
+						<button onClick={handleExperienceAdd}>Add Experience</button>
 					)}
 				</section>
 			</div>
