@@ -1,6 +1,7 @@
 import { useState } from "react";
 import uniqid from "uniqid";
 import PersonalDetails from "./components/PersonalDetails.jsx";
+import Education from "./components/EducationDetails.jsx";
 
 function App() {
 	const [personalDetails, setPersonalDetails] = useState({
@@ -12,6 +13,8 @@ function App() {
 
 	const [education, setEducation] = useState([]);
 	const [experience, setExperience] = useState([]);
+
+	const [educationEditID, setEducationEditID] = useState(null);
 
 	const handleDetailsChange = (event) => {
 		const name = event.target.name;
@@ -26,21 +29,22 @@ function App() {
 			address: "",
 		});
 	};
+
 	const handleEducationAdd = (event) => {
-		const { school, degree, startDate, endDate } = event.target.elements;
+		const id = uniqid();
 		setEducation((prevEducation) => [
 			...prevEducation,
 			{
-				id: uniqid(),
-				school: school.value,
-				degree: degree.value,
-				startDate: startDate.value,
-				endDate: endDate.value,
+				id,
+				school: "",
+				degree: "",
+				startDate: "",
+				endDate: "",
 			},
 		]);
+		setEducationEditID(id);
 	};
-	const handleEducationRemove = (event) => {
-		const { key } = event.target.dataset;
+	const handleEducationRemove = (key) => {
 		const updatedEducation = education.filter((item) => item.id != key);
 		setEducation(updatedEducation);
 	};
@@ -53,26 +57,24 @@ function App() {
 			}
 			return { ...item };
 		});
+		console.log(key);
 		setEducation(educationUpdate);
 	};
 
 	const handleExperienceAdd = (event) => {
-		const { company, position, startDate, endDate, description } =
-			event.target.elements;
 		setExperience((prevExperience) => [
 			...prevExperience,
 			{
 				id: uniqid(),
-				company: company.value,
-				position: position.value,
-				startDate: startDate.value,
-				endDate: endDate.value,
-				description: description.value,
+				company: "",
+				position: "",
+				startDate: "",
+				endDate: "",
+				description: "",
 			},
 		]);
 	};
-	const handleExperienceRemove = (event) => {
-		const { key } = event.target.dataset;
+	const handleExperienceRemove = (key) => {
 		const updatedExperience = experience.filter((item) => item.id != key);
 		setExperience(updatedExperience);
 	};
@@ -91,14 +93,43 @@ function App() {
 	return (
 		<div>
 			<div>
-				<PersonalDetails
-					fullName={personalDetails.fullName}
-					email={personalDetails.email}
-					phone={personalDetails.phone}
-					address={personalDetails.address}
-					handleChange={handleDetailsChange}
-					removeDetails={handleDetailsRemove}
-				/>
+				<section className="form details">
+					<PersonalDetails
+						fullName={personalDetails.fullName}
+						email={personalDetails.email}
+						phone={personalDetails.phone}
+						address={personalDetails.address}
+						handleChange={handleDetailsChange}
+						removeDetails={handleDetailsRemove}
+					/>
+				</section>
+				<section className="form education">
+					<h1>Education</h1>
+					{education && (
+						<div>
+							{education.map((item) => {
+								return (
+									<Education
+										key={item.id}
+										id={item.id}
+										school={item.school}
+										degree={item.degree}
+										startDate={item.startDate}
+										endDate={item.endDate}
+										description={item.description}
+										handleChange={handleEducationChange}
+										editID={educationEditID}
+										handleEditID={(id) => setEducationEditID(id)}
+										removeEducation={handleEducationRemove}
+									/>
+								);
+							})}
+						</div>
+					)}
+					{educationEditID == null && (
+						<button onClick={handleEducationAdd}>Add</button>
+					)}
+				</section>
 			</div>
 			<div>
 				<div className="cv-document">
@@ -110,6 +141,7 @@ function App() {
 						</p>
 						<p>{personalDetails.address}</p>
 					</div>
+					<div className="cv-body"></div>
 				</div>
 			</div>
 		</div>
