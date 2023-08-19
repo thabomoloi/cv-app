@@ -94,9 +94,14 @@ function App() {
 		setExperience(experienceUpdate);
 	};
 
+	const appStyles = {
+		display: "flex",
+		flexFlow: "row nowrap",
+		gap: "2em",
+	};
 	return (
-		<div>
-			<div>
+		<div className="app-container" style={appStyles}>
+			<div className="forms-section">
 				<section className="form details">
 					<h2>Personal Details</h2>
 					<PersonalDetails
