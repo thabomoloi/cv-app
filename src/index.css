@@ -65,15 +65,44 @@ h2 {
 .cv-body section > div {
 	margin-bottom: 1em;
 }
+
 .cv-document section > div {
 	display: grid;
 	grid-template-columns: 30% 70%;
 	gap: 1em;
 }
+.forms-section section {
+	margin: 2rem;
+	width: 15rem;
+}
+.forms-section section > div > form,
+.forms-section section > div > div {
+	margin-bottom: 2em;
+}
+
+.forms-section form {
+	display: flex;
+	flex-direction: column;
+	gap: 1em;
+}
+.forms-section .form-container {
+	display: flex;
+	flex-direction: column;
+	gap: 0.25rem;
+}
+.forms-section .viewMode p {
+	margin: 0.5rem 0;
+}
+
+.forms-section .viewMode .buttons {
+	display: flex;
+	gap: 0.5em;
+	flex-direction: column;
+}
 @media (prefers-color-scheme: light) {
 	:root {
 		color: #213547;
-		background-color: #ffffff;
+		background-color: #e4e4e4;
 	}
 	a:hover {
 		color: #747bff;
