@@ -1,6 +1,13 @@
 import { useState } from "react";
 
-function PersonalDetails({ fullName, email, phone, address, handleChange }) {
+function PersonalDetails({
+	fullName,
+	email,
+	phone,
+	address,
+	handleChange,
+	removeDetails,
+}) {
 	const [editMode, setEditMode] = useState(true);
 
 	const handleSubmit = (event) => {
@@ -13,6 +20,7 @@ function PersonalDetails({ fullName, email, phone, address, handleChange }) {
 	};
 
 	const handleRemove = (event) => {
+		removeDetails();
 		setEditMode(true);
 	};
 
