@@ -3,6 +3,7 @@ import uniqid from "uniqid";
 import PersonalDetails from "./components/PersonalDetails.jsx";
 import Education from "./components/EducationDetails.jsx";
 import Experience from "./components/ExperienceDetails.jsx";
+import CVDocument from "./components/CVDocument.jsx";
 
 function App() {
 	const [personalDetails, setPersonalDetails] = useState({
@@ -121,7 +122,6 @@ function App() {
 										degree={item.degree}
 										startDate={item.startDate}
 										endDate={item.endDate}
-										description={item.description}
 										handleChange={handleEducationChange}
 										editID={educationEditID}
 										handleEditID={(id) => setEducationEditID(id)}
@@ -163,17 +163,11 @@ function App() {
 				</section>
 			</div>
 			<div>
-				<div className="cv-document">
-					<div className="cv-header">
-						<h1>{personalDetails.fullName}</h1>
-						<p className="contact-details">
-							<span>{personalDetails.email}</span>
-							<span>{personalDetails.phone}</span>
-						</p>
-						<p>{personalDetails.address}</p>
-					</div>
-					<div className="cv-body"></div>
-				</div>
+				<CVDocument
+					personalDetails={personalDetails}
+					education={education}
+					experience={experience}
+				/>
 			</div>
 		</div>
 	);
