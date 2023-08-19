@@ -4,17 +4,16 @@ import PersonalDetails from "./components/PersonalDetails.jsx";
 import Education from "./components/EducationDetails.jsx";
 import Experience from "./components/ExperienceDetails.jsx";
 import CVDocument from "./components/CVDocument.jsx";
+import generateDefaultCV from "./defaultCV.jsx";
 
 function App() {
-	const [personalDetails, setPersonalDetails] = useState({
-		fullName: "",
-		email: "",
-		phone: "",
-		address: "",
-	});
+	const defaultDetails = generateDefaultCV();
+	const [personalDetails, setPersonalDetails] = useState(
+		defaultDetails.personalDetails
+	);
 
-	const [education, setEducation] = useState([]);
-	const [experience, setExperience] = useState([]);
+	const [education, setEducation] = useState(defaultDetails.education);
+	const [experience, setExperience] = useState(defaultDetails.experience);
 
 	const [educationEditID, setEducationEditID] = useState(null);
 	const [experienceEditID, setExperienceEditID] = useState(null);
@@ -145,6 +144,7 @@ function App() {
 										key={item.id}
 										id={item.id}
 										company={item.company}
+										position={item.position}
 										startDate={item.startDate}
 										endDate={item.endDate}
 										description={item.description}
