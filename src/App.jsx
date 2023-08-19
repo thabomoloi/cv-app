@@ -104,6 +104,11 @@ function App() {
 				<div className="cv-document">
 					<div className="cv-header">
 						<h1>{personalDetails.fullName}</h1>
+						<p className="contact-details">
+							<span>{personalDetails.email}</span>
+							<span>{personalDetails.phone}</span>
+						</p>
+						<p>{personalDetails.address}</p>
 					</div>
 				</div>
 			</div>
